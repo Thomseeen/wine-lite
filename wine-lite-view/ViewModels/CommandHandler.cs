@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace wine_lite_view.ViewModels {
+    /// <summary>
+    /// Generic Command Handler to use with WPF DataBinding for MVVM-style commands
+    /// </summary>
     public class CommandHandler : ICommand {
         private Action _action;
         private Func<bool> _canExecute;
