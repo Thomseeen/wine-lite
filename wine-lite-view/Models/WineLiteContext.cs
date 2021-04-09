@@ -15,6 +15,10 @@ namespace wine_lite_view.Models {
         private static bool _created = false;
 
         public DbSet<WineModel> Wines { get; set; }
+        public DbSet<BookingModel> Bookings { get; set; }
+        public DbSet<VendorModel> Vendors { get; set; }
+        public DbSet<TastingModel> Tastings { get; set; }
+        public DbSet<RatingModel> Ratings { get; set; }
 
         public WineLiteContext() {
             if (!_created) {
