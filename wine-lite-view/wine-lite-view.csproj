@@ -19,6 +19,7 @@
     <TransformOutOfDateOnly>false</TransformOutOfDateOnly>
     <PackageIcon>icon.png</PackageIcon>
     <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -33,18 +34,26 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v16.0\TextTemplating\Microsoft.TextTemplating.targets" />
 
   <ItemGroup>
+    <None Remove="Resources\Document_16x.png" />
+    <None Remove="Resources\Exit_16x.png" />
     <None Remove="Resources\icon.ico" />
+    <None Remove="Resources\NewFile_16x.png" />
+    <None Remove="Resources\OpenFile_16x.png" />
+    <None Remove="Resources\StatusInformation_16x.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="Resources\icon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-    <None Include="Resources\icon.png">
+    <Resource Include="Resources\Document_16x.png" />
+    <Resource Include="Resources\Exit_16x.png" />
+    <Resource Include="Resources\icon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
-    </None>
+    </Resource>
     <None Include="VersionAutoIncrementer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -57,16 +66,22 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="MahApps.Metro" Version="2.4.4" />
-    <PackageReference Include="MahApps.Metro.IconPacks" Version="4.8.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.5" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="3.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Resources\icon.ico" />
+    <Resource Include="Resources\NewFile_16x.png" />
+    <Resource Include="Resources\OpenFile_16x.png" />
+    <Resource Include="Resources\StatusInformation_16x.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Update="VersionAutoIncrementer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>VersionAutoIncrementer.cs</LastGenOutput>
@@ -82,6 +97,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Update="VersionAutoIncrementer.cs">
       <DesignTime>True</DesignTime>

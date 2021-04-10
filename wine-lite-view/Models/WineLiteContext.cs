@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.IO;
-using System.Reflection;
 
 namespace wine_lite_view.Models {
     public class WineLiteContext : DbContext {

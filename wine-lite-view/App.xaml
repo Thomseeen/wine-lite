@@ -1,15 +1,38 @@
-﻿<Application x:Class="wine_lite_view.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="Views/MainView.xaml">
+﻿<Application
+    x:Class="wine_lite_view.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    StartupUri="Views/MainView.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <!-- Theme setting -->
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
+                <ResourceDictionary>
+                    <Image x:Key="Exit">
+                        <Image.Source>
+                            <BitmapImage UriSource="pack://application:,,,/Resources/Exit_16x.png" />
+                        </Image.Source>
+                    </Image>
+                    <Image x:Key="Information">
+                        <Image.Source>
+                            <BitmapImage UriSource="pack://application:,,,/Resources/StatusInformation_16x.png" />
+                        </Image.Source>
+                    </Image>
+                    <Image x:Key="File">
+                        <Image.Source>
+                            <BitmapImage UriSource="pack://application:,,,/Resources/Document_16x.png" />
+                        </Image.Source>
+                    </Image>
+                    <Image x:Key="NewFile">
+                        <Image.Source>
+                            <BitmapImage UriSource="pack://application:,,,/Resources/NewFile_16x.png" />
+                        </Image.Source>
+                    </Image>
+                    <Image x:Key="OpenFile">
+                        <Image.Source>
+                            <BitmapImage UriSource="pack://application:,,,/Resources/OpenFile_16x.png" />
+                        </Image.Source>
+                    </Image>
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

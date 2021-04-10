@@ -1,44 +1,60 @@
-﻿<mah:MetroWindow x:Class="wine_lite_view.MainView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:local="clr-namespace:wine_lite_view.ViewModels"
-        mc:Ignorable="d"
-        Title="{Binding Title, Mode=OneWay}"
-        Icon="{Binding Icon, Mode=OneWay}"
-        Height="450"
-        Width="800"
-        ResizeMode="CanResizeWithGrip"
-        WindowStartupLocation="CenterScreen">
+﻿<Window
+    x:Class="wine_lite_view.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:wine_lite_view.ViewModels"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="{Binding Title, Mode=OneWay}"
+    Width="800"
+    Height="450"
+    Icon="{Binding Icon, Mode=OneWay}"
+    ResizeMode="CanResizeWithGrip"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Window.DataContext>
-        <local:MainViewModel/>
+        <local:MainViewModel />
     </Window.DataContext>
 
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_File">
-                <MenuItem Name="MenuItemnew" Header="_New DB"/>
-                <MenuItem Name="MenuItemOpen" Header="_Open DB"/>
-                <Separator/>
-                <MenuItem Name="MenuItemExit" Header="_Exit"/>
+            <MenuItem Header="_File" Icon="{StaticResource File}">
+                <MenuItem
+                    Name="MenuItemNew"
+                    Command="{Binding ClickNew}"
+                    Header="_New DB"
+                    Icon="{StaticResource NewFile}" />
+                <MenuItem
+                    Name="MenuItemOpen"
+                    Command="{Binding ClickOpen}"
+                    Header="_Open DB"
+                    Icon="{StaticResource OpenFile}" />
+                <Separator />
+                <MenuItem
+                    Name="MenuItemExit"
+                    Command="{Binding ClickExit}"
+                    Header="Exit"
+                    Icon="{StaticResource Exit}" />
             </MenuItem>
+            <MenuItem
+                Command="{Binding ClickInfo}"
+                Header="_Info"
+                Icon="{StaticResource Information}" />
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem HorizontalAlignment="Right">
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Opened File:" Margin="5 0"/>
-                    <Label Content="{Binding CurrentDbPath, Mode=OneWay}" Margin="5 0"/>
+                    <Label Content="Opened File:" />
+                    <TextBox
+                        Height="20"
+                        Margin="5,0"
+                        VerticalContentAlignment="Center"
+                        IsEnabled="False"
+                        IsReadOnly="True"
+                        Text="{Binding CurrentDbPath, Mode=OneWay}" />
                 </StackPanel>
             </StatusBarItem>
         </StatusBar>
-        <DockPanel DockPanel.Dock="Bottom">
-            <mah:MetroTabControl>
-                <mah:MetroTabItem>
-
-                </mah:MetroTabItem>
-            </mah:MetroTabControl>
-        </DockPanel>
+        <DockPanel DockPanel.Dock="Bottom" />
     </DockPanel>
-</mah:MetroWindow>
+</Window>

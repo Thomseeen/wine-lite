@@ -1,6 +1,4 @@
-﻿using MahApps.Metro.Controls;
-using System.Windows;
-using wine_lite_view.ViewModels;
+﻿using wine_lite_view.ViewModels;
 
 namespace wine_lite_view {
     /// <summary>
