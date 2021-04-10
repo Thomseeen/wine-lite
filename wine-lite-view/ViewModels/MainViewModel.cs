@@ -78,7 +78,7 @@ namespace wine_lite_view.ViewModels {
         private void ShowInfo() {
             MessageBox.Show(
                 $"{Title}\n" +
-                $"Copyright (c) 2021 Thomas Wagner\n\n" +
+                $"Copyright (c) 2021 Thomas Wagner (thomas@the-wagner.de)\n\n" +
                 $"Track you're ever growing collection of beverages.\n",
                 $"Information"
                 );
