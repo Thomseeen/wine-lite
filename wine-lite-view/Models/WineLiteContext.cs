@@ -4,12 +4,8 @@ using System.Reflection;
 
 namespace wine_lite_view.Models {
     public class WineLiteContext : DbContext {
-        #region Constants
-        private const string DEFAULT_DB_NAME = "wines.wldb";
-        private readonly static string DEFAULT_DB_PATH = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-        #endregion
-
         #region Private Fields
+        private string _dbPath;
         #endregion
 
         #region Properties
@@ -21,7 +17,9 @@ namespace wine_lite_view.Models {
         #endregion
 
         #region Constructors
-        public WineLiteContext(bool forcerebuild = false) {
+        public WineLiteContext(string dbpath, bool forcerebuild = false) {
+            _dbPath = dbpath;
+
             if (forcerebuild) {
                 Database.EnsureDeleted();
             }
@@ -30,7 +28,7 @@ namespace wine_lite_view.Models {
         #endregion
 
         #region DbContext Overrides
-        protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlite($"Data Source={DEFAULT_DB_PATH}\\{DEFAULT_DB_NAME}");
+        protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlite($"Data Source={_dbPath}");
         #endregion
     }
 }

@@ -4,6 +4,7 @@
 using System.Reflection;
 
 [assembly: AssemblyVersion("<#= this.Major #>.<#= this.Minor #>.<#= this.DaysSinceProjectStarted #>.<#= this.MinutesSinceMidnight  #>")]
+[assembly: AssemblyFileVersion("<#= this.Major #>.<#= this.Minor #>.<#= this.DaysSinceProjectStarted #>.<#= this.MinutesSinceMidnight  #>")]
 
 <#+
 

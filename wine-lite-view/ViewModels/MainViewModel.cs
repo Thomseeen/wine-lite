@@ -1,23 +1,38 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using wine_lite_view.Models;
 
 namespace wine_lite_view.ViewModels {
     public class MainViewModel : INotifyPropertyChanged {
+        #region Constants
+        private const string DEFAULT_DB_NAME = "wines.wldb";
+        private readonly static string DEFAULT_DB_PATH = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+        #endregion
+
         #region Private Fields
         private ICommand _clickCmd1;
         private ICommand _clickCmd2;
 
-        private readonly WineLiteContext db;
+        private readonly WineLiteContext _db;
+        private string _currentDbPath;
         #endregion
 
         #region Properties
         public string Title => $"Wine Lite (v{Assembly.GetEntryAssembly().GetName().Version})";
+        public ImageSource Icon => BitmapFrame.Create(new Uri("pack://application:,,,/Resources/icon.ico", UriKind.RelativeOrAbsolute));
+
+        public string CurrentDbPath {
+            get { return _currentDbPath; }
+            private set { _currentDbPath = value; OnPropertyChanged(); }
+        }
 
         public bool CanExecute => true;
 
@@ -31,28 +46,29 @@ namespace wine_lite_view.ViewModels {
 
         #region Constructors
         public MainViewModel() {
-            db = new WineLiteContext();
+            CurrentDbPath = $"{DEFAULT_DB_PATH}\\{DEFAULT_DB_NAME}";
+            _db = new WineLiteContext(CurrentDbPath);
         }
         #endregion
 
         #region Command Methods
         public void AddDummyData() {
-            db.Wines.AddRange(new List<WineModel>(){
+            _db.Wines.AddRange(new List<WineModel>(){
                 new WineModel() { Name = "Test1" },
                 new WineModel() { Name = "Test2" }
             });
 
-            db.SaveChanges();
+            _db.SaveChanges();
         }
 
         public void ReadData() {
-            var test = db.Wines.ToList();
+            var test = _db.Wines.ToList();
         }
         #endregion
 
         #region Eventhandling
-        public void MainView_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
-            db.Dispose(); ;
+        public void MainView_Closing(object sender, CancelEventArgs e) {
+            _db.Dispose(); ;
         }
         #endregion
 
