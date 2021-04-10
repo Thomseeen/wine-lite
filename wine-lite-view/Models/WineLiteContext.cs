@@ -10,7 +10,6 @@ namespace wine_lite_view.Models {
         #endregion
 
         #region Private Fields
-        private static bool _created = false;
         #endregion
 
         #region Properties
@@ -22,12 +21,11 @@ namespace wine_lite_view.Models {
         #endregion
 
         #region Constructors
-        public WineLiteContext() {
-            if (!_created) {
-                _created = true;
+        public WineLiteContext(bool forcerebuild = false) {
+            if (forcerebuild) {
                 Database.EnsureDeleted();
-                Database.EnsureCreated();
             }
+            Database.EnsureCreated();
         }
         #endregion
 

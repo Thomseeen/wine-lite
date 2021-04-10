@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
@@ -16,6 +17,8 @@ namespace wine_lite_view.ViewModels {
         #endregion
 
         #region Properties
+        public string Title => $"Wine Lite (v{Assembly.GetEntryAssembly().GetName().Version})";
+
         public bool CanExecute => true;
 
         public ICommand ClickCmd1 {
