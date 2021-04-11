@@ -1,6 +1,9 @@
-﻿namespace wine_lite_view.Models {
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace wine_lite_view.Models {
     public class RatingModel {
-        public int Id { get; set; }
+        [Key]
+        public int RatingId { get; set; }
 
         #region Data
         public string Name { get; set; }

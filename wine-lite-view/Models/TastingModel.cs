@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace wine_lite_view.Models {
     public class TastingModel {
-        public int Id { get; set; }
+        [Key]
+        public int TastingId { get; set; }
 
         #region Data
         public string Name { get; set; }
@@ -12,6 +16,7 @@ namespace wine_lite_view.Models {
 
         #region Mappings
         public WineModel Wine { get; set; }
+        public virtual ICollection<RatingModel> Ratings { get; private set; } = new ObservableCollection<RatingModel>();
         #endregion
     }
 }

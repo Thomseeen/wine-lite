@@ -42,6 +42,12 @@
                 Icon="{StaticResource Information}" />
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <Button
+                    Name="ButtonSaveChanges"
+                    Command="{Binding ClickSave}"
+                    Content="Save" />
+            </StatusBarItem>
             <StatusBarItem HorizontalAlignment="Right">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Opened File:" />
@@ -55,6 +61,36 @@
                 </StackPanel>
             </StatusBarItem>
         </StatusBar>
-        <DockPanel DockPanel.Dock="Bottom" />
+        <TabControl DockPanel.Dock="Bottom">
+            <TabItem Header="Wines">
+                <DataGrid
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="True"
+                    EnableRowVirtualization="True"
+                    ItemsSource="{Binding WineCollectionView}"
+                    RowDetailsVisibilityMode="VisibleWhenSelected">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                        <DataGridTextColumn Binding="{Binding Year}" Header="Year" />
+                        <DataGridTextColumn Binding="{Binding Country}" Header="Country" />
+                        <DataGridTextColumn Binding="{Binding Region}" Header="Region" />
+                        <DataGridTextColumn Binding="{Binding Location}" Header="Location" />
+                        <DataGridTextColumn Binding="{Binding Vine}" Header="Vine" />
+                        <DataGridTextColumn Binding="{Binding WineType}" Header="Wine" />
+                        <DataGridTextColumn Binding="{Binding Taste}" Header="Taste" />
+                        <DataGridTextColumn Binding="{Binding Producer.Name}" Header="Producer" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Vendors">
+                <DataGrid ItemsSource="{Binding VendorCollectionView}" />
+            </TabItem>
+            <TabItem Header="Tastings">
+                <DataGrid ItemsSource="{Binding TastingCollectionView}" />
+            </TabItem>
+            <TabItem Header="Bookings">
+                <DataGrid ItemsSource="{Binding BookingCollectionView}" />
+            </TabItem>
+        </TabControl>
     </DockPanel>
 </Window>

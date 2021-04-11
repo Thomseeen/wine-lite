@@ -1,6 +1,11 @@
-﻿namespace wine_lite_view.Models {
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace wine_lite_view.Models {
     public class VendorModel {
-        public int Id { get; set; }
+        [Key]
+        public int VendorId { get; set; }
 
         #region Data
         public bool IsProducer { get; set; }
@@ -16,6 +21,8 @@
         #endregion
 
         #region Mappings
+        public virtual ICollection<VendorModel> Vendors { get; private set; } = new ObservableCollection<VendorModel>();
+        public virtual ICollection<BookingModel> Bookings { get; private set; } = new ObservableCollection<BookingModel>();
         #endregion
     }
 }

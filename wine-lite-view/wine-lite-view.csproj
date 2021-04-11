@@ -12,14 +12,14 @@
     <NeutralLanguage>en</NeutralLanguage>
     <PackageProjectUrl>https://github.com/Thomseeen/wine-lite</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Thomseeen/wine-lite</RepositoryUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <TransformOnBuild>true</TransformOnBuild>
     <OverwriteReadOnlyOutputFiles>true</OverwriteReadOnlyOutputFiles>
     <TransformOutOfDateOnly>false</TransformOutOfDateOnly>
-    <PackageIcon>icon.png</PackageIcon>
-    <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
-    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -64,7 +64,6 @@
   <ItemGroup>
     <PackageReference Include="Costura.Fody" Version="5.1.0">
       <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.5" />
     <PackageReference Include="Ookii.Dialogs.Wpf" Version="3.1.0" />

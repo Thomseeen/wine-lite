@@ -1,8 +1,10 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace wine_lite_view.Models {
     public class BookingModel {
-        public int Id { get; set; }
+        [Key]
+        public int BookingId { get; set; }
 
         #region Data
         public int Quantity { get; set; }
