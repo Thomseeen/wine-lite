@@ -16,6 +16,7 @@ using System.Windows;
 using System.Collections.ObjectModel;
 using System.Windows.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Specialized;
 
 namespace wine_lite_view.ViewModels {
     public class MainViewModel : INotifyPropertyChanged {
@@ -27,6 +28,9 @@ namespace wine_lite_view.ViewModels {
 
         #region Private Fields
         #region Binding Data
+        private int _currentTabIndex;
+        private bool _dataChanged;
+
         private ICollectionView _wineCollectionView;
         private ICollectionView _vendorCollectionView;
         private ICollectionView _tastingCollectionView;
@@ -55,6 +59,15 @@ namespace wine_lite_view.ViewModels {
         }
 
         #region Binding Data
+        public int CurrentTabIndex {
+            get => _currentTabIndex;
+            set { _currentTabIndex = value; OnPropertyChanged(); }
+        }
+        public bool DataChanged {
+            get => _dataChanged;
+            private set { _dataChanged = value; OnPropertyChanged(); }
+        }
+
         public ICollectionView WineCollectionView {
             get => _wineCollectionView;
             private set { _wineCollectionView = value; OnPropertyChanged(); }
@@ -89,7 +102,7 @@ namespace wine_lite_view.ViewModels {
             get => _clickOpen ??= new CommandHandler(() => OpenDb(), () => CanExecuteAlways);
         }
         public ICommand ClickSave {
-            get => _clickSave ??= new CommandHandler(() => SaveDb(), () => CanExecuteAlways);
+            get => _clickSave ??= new CommandHandler(() => SaveDb(), () => DataChanged);
         }
         #endregion
         #endregion
@@ -144,6 +157,8 @@ namespace wine_lite_view.ViewModels {
             OnPropertyChanged(nameof(VendorCollectionView));
             OnPropertyChanged(nameof(TastingCollectionView));
             OnPropertyChanged(nameof(BookingCollectionView));
+
+            DataChanged = false;
         }
         #endregion
 
@@ -169,6 +184,18 @@ namespace wine_lite_view.ViewModels {
             VendorCollectionView = CollectionViewSource.GetDefaultView(_db.Vendors.Local.ToObservableCollection());
             TastingCollectionView = CollectionViewSource.GetDefaultView(_db.Tastings.Local.ToObservableCollection());
             BookingCollectionView = CollectionViewSource.GetDefaultView(_db.Bookings.Local.ToObservableCollection());
+
+            WineCollectionView.CollectionChanged += CollectionView_CollectionChanged;
+            VendorCollectionView.CollectionChanged += CollectionView_CollectionChanged;
+            TastingCollectionView.CollectionChanged += CollectionView_CollectionChanged;
+            BookingCollectionView.CollectionChanged += CollectionView_CollectionChanged;
+        }
+
+        private void CollectionView_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+            DataChanged = !_db.Wines.ToList().SequenceEqual(_db.Wines.Local.ToList()) ||
+                !_db.Vendors.ToList().SequenceEqual(_db.Vendors.Local.ToList()) ||
+                !_db.Tastings.ToList().SequenceEqual(_db.Tastings.Local.ToList()) ||
+                !_db.Bookings.ToList().SequenceEqual(_db.Bookings.Local.ToList());
         }
         #endregion
 

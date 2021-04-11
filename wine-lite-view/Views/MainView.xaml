@@ -45,8 +45,12 @@
             <StatusBarItem>
                 <Button
                     Name="ButtonSaveChanges"
+                    Width="50"
+                    Height="20"
                     Command="{Binding ClickSave}"
-                    Content="Save" />
+                    Content="Save"
+                    FontWeight="Bold"
+                    IsEnabled="{Binding DataChanged}" />
             </StatusBarItem>
             <StatusBarItem HorizontalAlignment="Right">
                 <StackPanel Orientation="Horizontal">
@@ -61,14 +65,9 @@
                 </StackPanel>
             </StatusBarItem>
         </StatusBar>
-        <TabControl DockPanel.Dock="Bottom">
+        <TabControl DockPanel.Dock="Bottom" SelectedIndex="{Binding CurrentTabIndex}">
             <TabItem Header="Wines">
-                <DataGrid
-                    AutoGenerateColumns="False"
-                    CanUserAddRows="True"
-                    EnableRowVirtualization="True"
-                    ItemsSource="{Binding WineCollectionView}"
-                    RowDetailsVisibilityMode="VisibleWhenSelected">
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding WineCollectionView}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
                         <DataGridTextColumn Binding="{Binding Year}" Header="Year" />
@@ -79,17 +78,54 @@
                         <DataGridTextColumn Binding="{Binding WineType}" Header="Wine" />
                         <DataGridTextColumn Binding="{Binding Taste}" Header="Taste" />
                         <DataGridTextColumn Binding="{Binding Producer.Name}" Header="Producer" />
+                        <DataGridTextColumn Binding="{Binding AvgPrice}" Header="Avg. Price" />
+                        <DataGridTextColumn Binding="{Binding BottlesCnt}" Header="Current Bottles" />
+                        <DataGridTextColumn Binding="{Binding BottlesBought}" Header="Overall Bottles" />
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
             <TabItem Header="Vendors">
-                <DataGrid ItemsSource="{Binding VendorCollectionView}" />
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding VendorCollectionView}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                        <DataGridTextColumn Binding="{Binding IsProducer}" Header="Producer" />
+                        <DataGridTextColumn Binding="{Binding Street}" Header="Street" />
+                        <DataGridTextColumn Binding="{Binding ZipCode}" Header="Zip Code" />
+                        <DataGridTextColumn Binding="{Binding City}" Header="City" />
+                        <DataGridTextColumn Binding="{Binding Country}" Header="Country" />
+                        <DataGridTextColumn Binding="{Binding PhoneNumber}" Header="Phone Number" />
+                        <DataGridTextColumn Binding="{Binding EMail}" Header="e-Mail" />
+                        <DataGridTextColumn Binding="{Binding Website}" Header="Website" />
+                        <DataGridTextColumn Binding="{Binding Comment}" Header="Comment" />
+                        <DataGridTextColumn Binding="{Binding BottlesBought}" Header="Overall Bottles" />
+                        <DataGridTextColumn Binding="{Binding UniqueWines}" Header="Unique Wines" />
+                    </DataGrid.Columns>
+                </DataGrid>
             </TabItem>
             <TabItem Header="Tastings">
-                <DataGrid ItemsSource="{Binding TastingCollectionView}" />
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding TastingCollectionView}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                        <DataGridTextColumn Binding="{Binding Taster}" Header="Taster" />
+                        <DataGridTextColumn Binding="{Binding Date}" Header="Date" />
+                        <DataGridTextColumn Binding="{Binding Wine.Name}" Header="Wine" />
+                        <DataGridTextColumn Binding="{Binding OverallRating}" Header="Overall Rating" />
+                        <DataGridTextColumn Binding="{Binding OverallRating}" Header="Avg. Rating Offset" />
+                    </DataGrid.Columns>
+                </DataGrid>
             </TabItem>
             <TabItem Header="Bookings">
-                <DataGrid ItemsSource="{Binding BookingCollectionView}" />
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding BookingCollectionView}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Quantity}" Header="Quantity" />
+                        <DataGridTextColumn Binding="{Binding Price}" Header="Price" />
+                        <DataGridTextColumn Binding="{Binding Date}" Header="Date" />
+                        <DataGridTextColumn Binding="{Binding Wine.Name}" Header="Wine" />
+                        <DataGridTextColumn Binding="{Binding Vendor.Name}" Header="Vendor" />
+                        <DataGridTextColumn Binding="{Binding OverallPrice}" Header="Overall Price" />
+                        <DataGridTextColumn Binding="{Binding AvgPriceOffset}" Header="Avg. Price Offset" />
+                    </DataGrid.Columns>
+                </DataGrid>
             </TabItem>
         </TabControl>
     </DockPanel>
