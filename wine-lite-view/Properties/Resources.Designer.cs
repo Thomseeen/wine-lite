@@ -61,6 +61,16 @@ namespace wine_lite_view.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AddTest_16x {
+            get {
+                object obj = ResourceManager.GetObject("AddTest_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] Document_16x {
@@ -127,6 +137,16 @@ namespace wine_lite_view.Properties {
             get {
                 object obj = ResourceManager.GetObject("StatusInformation_16x", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap VersionInformation_16x {
+            get {
+                object obj = ResourceManager.GetObject("VersionInformation_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

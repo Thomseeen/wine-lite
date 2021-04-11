@@ -34,12 +34,15 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v16.0\TextTemplating\Microsoft.TextTemplating.targets" />
 
   <ItemGroup>
+    <None Remove="Resources\AddTest_16x.png" />
     <None Remove="Resources\Document_16x.png" />
     <None Remove="Resources\Exit_16x.png" />
     <None Remove="Resources\icon.ico" />
+    <None Remove="Resources\icon.xcf" />
     <None Remove="Resources\NewFile_16x.png" />
     <None Remove="Resources\OpenFile_16x.png" />
     <None Remove="Resources\StatusInformation_16x.png" />
+    <None Remove="Resources\VersionInformation_16x.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,6 +51,7 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+    <Resource Include="Resources\AddTest_16x.png" />
     <Resource Include="Resources\Document_16x.png" />
     <Resource Include="Resources\Exit_16x.png" />
     <Resource Include="Resources\icon.png">
@@ -71,9 +75,11 @@
 
   <ItemGroup>
     <Resource Include="Resources\icon.ico" />
+    <Resource Include="Resources\icon.xcf" />
     <Resource Include="Resources\NewFile_16x.png" />
     <Resource Include="Resources\OpenFile_16x.png" />
     <Resource Include="Resources\StatusInformation_16x.png" />
+    <Resource Include="Resources\VersionInformation_16x.png" />
   </ItemGroup>
 
   <ItemGroup>

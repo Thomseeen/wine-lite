@@ -5,13 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace wine_lite_view.Models {
-    public class VendorModel {
+    public class Vendor {
         [Key]
         public int VendorId { get; set; }
 
         #region Data
-        [Required]
-        public bool IsProducer { get; set; }
+        public virtual bool IsProducer => false;
         [Required]
         public string Name { get; set; }
         [Required]
@@ -29,16 +28,17 @@ namespace wine_lite_view.Models {
         #endregion
 
         #region Mappings
-        public virtual ICollection<BookingModel> Bookings { get; private set; } = new ObservableCollection<BookingModel>();
+        public virtual ICollection<Wine> Wines { get; set; }
+        public virtual ICollection<Booking> Bookings { get; set; }
         #endregion
 
         #region Dynamic Data
         [NotMapped]
-        public float OverallSpendings => Bookings.Select(booking => booking.OverallPrice).Sum();
+        public float OverallSpendings => Bookings?.Select(booking => booking.OverallPrice).DefaultIfEmpty().Sum() ?? 0;
         [NotMapped]
-        public int BottlesBought => Bookings.Select(booking => booking.Quantity).Sum();
+        public int BottlesBought => Bookings?.Select(booking => booking.Quantity).DefaultIfEmpty().Sum() ?? 0;
         [NotMapped]
-        public int UniqueWines => Bookings.Select(booking => booking.Wine).Distinct().Count();
+        public int UniqueWines => Bookings?.Select(booking => booking.Wine).Distinct().Count() ?? 0;
         #endregion
 
         #region Comparable
@@ -47,7 +47,7 @@ namespace wine_lite_view.Models {
                 return false;
             }
 
-            var comp = (VendorModel)obj;
+            var comp = (Vendor)obj;
             return VendorId == comp.VendorId;
         }
 
@@ -55,5 +55,9 @@ namespace wine_lite_view.Models {
             return VendorId;
         }
         #endregion
+    }
+
+    public class Producer : Vendor {
+        public override bool IsProducer => true;
     }
 }

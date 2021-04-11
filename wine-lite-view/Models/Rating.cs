@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace wine_lite_view.Models {
-    public class RatingModel {
+    public class Rating {
         [Key]
         public int RatingId { get; set; }
 
@@ -15,7 +15,7 @@ namespace wine_lite_view.Models {
 
         #region Mappings
         [Required]
-        public TastingModel Tasting { get; set; }
+        public Tasting Tasting { get; set; }
         #endregion
 
         #region Comparable
@@ -24,7 +24,7 @@ namespace wine_lite_view.Models {
                 return false;
             }
 
-            var comp = (RatingModel)obj;
+            var comp = (Rating)obj;
             return RatingId == comp.RatingId;
         }
 

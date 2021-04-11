@@ -1,35 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 
 namespace wine_lite_view.Models {
-    public class TastingModel {
+    public class Booking {
         [Key]
-        public int TastingId { get; set; }
+        public int BookingId { get; set; }
 
         #region Data
         [Required]
-        public string Name { get; set; }
+        public int Quantity { get; set; }
         [Required]
         public DateTime Date { get; set; }
-        public string Taster { get; set; }
+        public float Price { get; set; }
         #endregion
 
         #region Mappings
         [Required]
-        public WineModel Wine { get; set; }
-        [Required]
-        public virtual ICollection<RatingModel> Ratings { get; private set; } = new ObservableCollection<RatingModel>();
+        public Wine Wine { get; set; }
+        public Vendor Vendor { get; set; }
         #endregion
 
         #region Dynamic Data
         [NotMapped]
-        public float OverallRating => Ratings.Select(rating => rating.Rate).Sum();
+        public float OverallPrice => Quantity * Price;
         [NotMapped]
-        public float AvgRatingOffset => OverallRating - Wine.AvgRating;
+        public float AvgPriceOffset => Price - Wine.AvgPrice;
         #endregion
 
         #region Comparable
@@ -38,12 +34,12 @@ namespace wine_lite_view.Models {
                 return false;
             }
 
-            var comp = (TastingModel)obj;
-            return TastingId == comp.TastingId;
+            var comp = (Booking)obj;
+            return BookingId == comp.BookingId;
         }
 
         public override int GetHashCode() {
-            return TastingId;
+            return BookingId;
         }
         #endregion
     }

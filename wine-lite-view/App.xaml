@@ -17,6 +17,16 @@
                             <BitmapImage UriSource="pack://application:,,,/Resources/StatusInformation_16x.png" />
                         </Image.Source>
                     </Image>
+                    <Image x:Key="VersionInformation">
+                        <Image.Source>
+                            <BitmapImage UriSource="pack://application:,,,/Resources/VersionInformation_16x.png" />
+                        </Image.Source>
+                    </Image>
+                    <Image x:Key="AddTest">
+                        <Image.Source>
+                            <BitmapImage UriSource="pack://application:,,,/Resources/AddTest_16x.png" />
+                        </Image.Source>
+                    </Image>
                     <Image x:Key="File">
                         <Image.Source>
                             <BitmapImage UriSource="pack://application:,,,/Resources/Document_16x.png" />

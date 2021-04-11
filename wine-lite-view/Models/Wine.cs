@@ -11,7 +11,7 @@ namespace wine_lite_view.Models {
         Rose
     }
 
-    public class WineModel {
+    public class Wine {
         [Key]
         public int WineId { get; set; }
 
@@ -32,28 +32,28 @@ namespace wine_lite_view.Models {
         #endregion
 
         #region Mappings
-        public virtual VendorModel Producer { get; set; }
+        public Producer Producer { get; set; }
 
-        public virtual ICollection<VendorModel> Vendors { get; private set; } = new ObservableCollection<VendorModel>();
-        public virtual ICollection<TastingModel> Tastings { get; private set; } = new ObservableCollection<TastingModel>();
-        public virtual ICollection<BookingModel> Bookings { get; private set; } = new ObservableCollection<BookingModel>();
+        public virtual ICollection<Vendor> Vendors { get; set; }
+        public virtual ICollection<Tasting> Tastings { get; set; }
+        public virtual ICollection<Booking> Bookings { get; set; }
         #endregion
 
         #region Dynamic Data
         [NotMapped]
-        public int VendorsCnt => Vendors.Count;
+        public int VendorsCnt => Vendors?.Count ?? 0;
         [NotMapped]
-        public int TastingsCnt => Tastings.Count;
+        public int TastingsCnt => Tastings?.Count ?? 0;
         [NotMapped]
-        public int BookingsCnt => Bookings.Count;
+        public int BookingsCnt => Bookings?.Count ?? 0;
         [NotMapped]
-        public int BottlesBought => Bookings.Where(booking => booking.Quantity > 0).Select(booking => booking.Quantity).Sum();
+        public int BottlesBought => Bookings?.Where(booking => booking.Quantity > 0)?.Select(booking => booking.Quantity).DefaultIfEmpty().Sum() ?? 0;
         [NotMapped]
-        public int BottlesCnt => Bookings.Select(tasting => tasting.Quantity).Sum();
+        public int BottlesCnt => Bookings?.Select(tasting => tasting.Quantity).DefaultIfEmpty().Sum() ?? 0;
         [NotMapped]
-        public float AvgPrice => Bookings.Select(booking => booking.Price).Average();
+        public float AvgPrice => Bookings?.Where(booking => booking.Quantity > 0)?.Select(booking => booking.Price).DefaultIfEmpty().Average() ?? 0;
         [NotMapped]
-        public float AvgRating => Tastings.Select(tasting => tasting.OverallRating).Average();
+        public float AvgRating => Tastings?.Select(tasting => tasting.OverallRating).DefaultIfEmpty().Average() ?? 0;
         #endregion
 
         #region Comparable
@@ -62,7 +62,7 @@ namespace wine_lite_view.Models {
                 return false;
             }
 
-            var comp = (WineModel)obj;
+            var comp = (Wine)obj;
             return WineId == comp.WineId;
         }
 

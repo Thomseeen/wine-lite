@@ -43,6 +43,7 @@ namespace wine_lite_view.ViewModels {
         private ICommand _clickNew;
         private ICommand _clickOpen;
         private ICommand _clickSave;
+        private ICommand _clickAddDummyData;
         #endregion
 
         private WineLiteContext _db;
@@ -89,6 +90,9 @@ namespace wine_lite_view.ViewModels {
         #region Commands
         public static bool CanExecuteAlways => true;
 
+        public ICommand ClickAddDummyData {
+            get => _clickAddDummyData ??= new CommandHandler(() => Util.Test.AddDummyData(_db), () => CanExecuteAlways);
+        }
         public ICommand ClickExit {
             get => _clickExit ??= new CommandHandler(() => ExitApp(), () => CanExecuteAlways);
         }
@@ -189,6 +193,11 @@ namespace wine_lite_view.ViewModels {
             VendorCollectionView.CollectionChanged += CollectionView_CollectionChanged;
             TastingCollectionView.CollectionChanged += CollectionView_CollectionChanged;
             BookingCollectionView.CollectionChanged += CollectionView_CollectionChanged;
+
+            var winestest = _db.Wines.ToList();
+            var vendorstest = _db.Vendors.ToList();
+            var tastingstest = _db.Tastings.ToList();
+            var bookingstest = _db.Bookings.ToList();
         }
 
         private void CollectionView_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {

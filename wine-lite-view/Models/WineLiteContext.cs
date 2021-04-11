@@ -7,11 +7,11 @@ namespace wine_lite_view.Models {
         #endregion
 
         #region Properties
-        public DbSet<WineModel> Wines { get; set; }
-        public DbSet<BookingModel> Bookings { get; set; }
-        public DbSet<VendorModel> Vendors { get; set; }
-        public DbSet<TastingModel> Tastings { get; set; }
-        public DbSet<RatingModel> Ratings { get; set; }
+        public DbSet<Wine> Wines { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Vendor> Vendors { get; set; }
+        public DbSet<Tasting> Tastings { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
         #endregion
 
         #region Constructors

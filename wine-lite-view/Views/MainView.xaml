@@ -36,10 +36,18 @@
                     Header="Exit"
                     Icon="{StaticResource Exit}" />
             </MenuItem>
-            <MenuItem
-                Command="{Binding ClickInfo}"
-                Header="_Info"
-                Icon="{StaticResource Information}" />
+            <MenuItem Header="_Info" Icon="{StaticResource Information}">
+                <MenuItem
+                    Name="MenuItemAbout"
+                    Command="{Binding ClickInfo}"
+                    Header="_About"
+                    Icon="{StaticResource VersionInformation}" />
+                <MenuItem
+                    Name="MenuItemAddDummyData"
+                    Command="{Binding ClickAddDummyData}"
+                    Header="_Add Dummy Data"
+                    Icon="{StaticResource AddTest}" />
+            </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
